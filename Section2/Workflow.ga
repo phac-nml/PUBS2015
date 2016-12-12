@@ -1,0 +1,221 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "Sequence Annotation", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "Input Dataset"
+                }
+            ], 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 272.5, 
+                "top": 430.5
+            }, 
+            "tool_errors": null, 
+            "tool_id": null, 
+            "tool_state": "{\"name\": \"Input Dataset\"}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "user_outputs": []
+        }, 
+        "1": {
+            "annotation": "", 
+            "id": 1, 
+            "input_connections": {
+                "input_file": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "FastQC:Read QC", 
+            "outputs": [
+                {
+                    "name": "html_file", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 466.5, 
+                "top": 299.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.52", 
+            "tool_state": "{\"__page__\": 0, \"contaminants\": \"null\", \"__rerun_remap_job_id__\": null, \"out_prefix\": \"\\\"FastQC\\\"\", \"input_file\": \"null\"}", 
+            "tool_version": "0.52", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "2": {
+            "annotation": "", 
+            "id": 2, 
+            "input_connections": {
+                "infile": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Abyss", 
+            "outputs": [
+                {
+                    "name": "outfile", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 470.5, 
+                "top": 493.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/edward-kirton/abyss_toolsuite/abyss/1.0.0", 
+            "tool_state": "{\"__page__\": 0, \"k\": \"\\\"41\\\"\", \"__rerun_remap_job_id__\": null, \"infile\": \"null\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "id": 3, 
+            "input_connections": {
+                "draft": {
+                    "id": 2, 
+                    "output_name": "outfile"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Extract contigs", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "hqoutput", 
+                    "type": "fasta"
+                }
+            ], 
+            "position": {
+                "left": 690.5, 
+                "top": 450.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "extract_contigs", 
+            "tool_state": "{\"threshold\": \"\\\"10000\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"draft\": \"null\"}", 
+            "tool_version": "0.0.1", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "id": 4, 
+            "input_connections": {
+                "input": {
+                    "id": 3, 
+                    "output_name": "hqoutput"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Select first", 
+            "outputs": [
+                {
+                    "name": "out_file1", 
+                    "type": "input"
+                }
+            ], 
+            "position": {
+                "left": 895.5, 
+                "top": 457.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "Show beginning1", 
+            "tool_state": "{\"__page__\": 0, \"input\": \"null\", \"__rerun_remap_job_id__\": null, \"lineNum\": \"\\\"2\\\"\"}", 
+            "tool_version": "1.0.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "id": 5, 
+            "input_connections": {
+                "input": {
+                    "id": 4, 
+                    "output_name": "out_file1"
+                }
+            }, 
+            "inputs": [], 
+            "name": "Prokka", 
+            "outputs": [
+                {
+                    "name": "out_gff", 
+                    "type": "gff"
+                }, 
+                {
+                    "name": "out_gbk", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_fna", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_faa", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_ffn", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_sqn", 
+                    "type": "asn1"
+                }, 
+                {
+                    "name": "out_fsa", 
+                    "type": "fasta"
+                }, 
+                {
+                    "name": "out_tbl", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_err", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_txt", 
+                    "type": "txt"
+                }, 
+                {
+                    "name": "out_log", 
+                    "type": "txt"
+                }
+            ], 
+            "position": {
+                "left": 1100.5, 
+                "top": 253.5
+            }, 
+            "post_job_actions": {}, 
+            "tool_errors": null, 
+            "tool_id": "prokka", 
+            "tool_state": "{\"kingdom\": \"{\\\"gcode\\\": \\\"11\\\", \\\"kingdom_select\\\": \\\"Bacteria\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"norrna\": \"\\\"False\\\"\", \"usegenus\": \"\\\"False\\\"\", \"metagenome\": \"\\\"False\\\"\", \"centre\": \"\\\"\\\"\", \"evalue\": \"\\\"1e-06\\\"\", \"proteins\": \"null\", \"locustag\": \"\\\"PROKKA\\\"\", \"fast\": \"\\\"False\\\"\", \"strain\": \"\\\"\\\"\", \"compliant\": \"{\\\"mincontig\\\": \\\"200\\\", \\\"compliant_select\\\": \\\"no\\\", \\\"__current_case__\\\": 0, \\\"addgenes\\\": \\\"False\\\"}\", \"__rerun_remap_job_id__\": null, \"plasmid\": \"\\\"\\\"\", \"increment\": \"\\\"1\\\"\", \"gffver\": \"\\\"3\\\"\", \"input\": \"null\", \"rfam\": \"\\\"False\\\"\", \"genus\": \"\\\"\\\"\", \"species\": \"\\\"\\\"\", \"notrna\": \"\\\"False\\\"\"}", 
+            "tool_version": "1.4.0", 
+            "type": "tool", 
+            "user_outputs": []
+        }
+    }, 
+    "uuid": "abb11756-a85a-448b-ba7b-1dccf993eb70"
+}
